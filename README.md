@@ -4,7 +4,7 @@ Run the Sql in acore_world, place the script under lua_scripts and .npc add 1800
 
 So far this is just the vanilla trader.
 
-This script was created for smaller private servers as a means to allow players some semblance of an auctionhouse. In its current interation, the ah module for Acore leaves a lot to be desired.
+This script was created for smaller private servers as a means to allow players some semblance of an auctionhouse. In its current iteration, the ah module for Acore leaves a lot to be desired.
 Prices are loosely based on authentic vanilla prices as this is for Individual Progression servers or servers that mimic vanilla via the 3.3.5 client. I will also be making scripts for TBC, Wrath, consumables, enchants, etc. 
 As a means to not create an infinite source of easy gold, I've adjusted some prices for crafted materials to be lower than usual to make the margins tighter.
 Please feel free to adjust any values you see fit.
