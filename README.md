@@ -1,4 +1,6 @@
 # Dynamic-Trader
+So far this is just the vanilla trader.
+
 The script uses a dynamic pricing system for items, with prices changing based on several factors, including the day of the week, the time of day, and a global fluctuation value. This means that prices will vary from month to month, day to day, hour to hour and has both buy and sell functions.
 Run the Sql in acore_world, place the script under lua_scripts and .npc add 180000 wherever you like. You can make additional npcs for faction specific ones at the top.
 
