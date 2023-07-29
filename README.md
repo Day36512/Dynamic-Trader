@@ -8,7 +8,6 @@ As a means to not create an infinite source of easy gold, I've adjusted some pri
 Please feel free to adjust any values you see fit.
 	
 	Features include:
-	The script uses a dynamic pricing system for items, with prices changing based on several factors, including the day of the week, the time of day, and a global fluctuation value. This means that prices will vary from month to month, day to 	day, hour to hour.
 	1. Inflation: The script includes an inflation system that increases prices over time, based on a defined monthly inflation rate. The inflation system can be enabled or disabled as needed.
 	2. Price Caps: The script includes a maximum inflation multiplier that limits the amount prices can increase due to inflation.
 	3. Price Fluctuations: The script includes a system for randomly fluctuating prices. This feature can be enabled or disabled as needed.
