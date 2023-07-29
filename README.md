@@ -2,14 +2,13 @@
 The script uses a dynamic pricing system for items, with prices changing based on several factors, including the day of the week, the time of day, and a global fluctuation value. This means that prices will vary from month to month, day to day, hour to hour and has both buy and sell functions.
 Run the Sql in acore_world, place the script under lua_scripts and .npc add 180000 wherever you like. You can make additional npcs for faction specific ones at the top.
 
-Features
-	This script was created for smaller private servers as a means to allow players some semblance of an auctionhouse. In its current interation, the ah module for Acore leaves a lot to be desired.
-	Prices are loosely based on authentic vanilla prices as this is for Individual Progression servers or servers that mimic vanilla via the 3.3.5 client. I will also be making scripts for TBC, Wrath, consumables, enchants, etc. 
-	As a means to not create an infinite source of easy gold, I've adjusted some prices for crafted materials to be lower than usual to make the margins tighter.
-	Please feel free to adjust any values you see fit.
+This script was created for smaller private servers as a means to allow players some semblance of an auctionhouse. In its current interation, the ah module for Acore leaves a lot to be desired.
+Prices are loosely based on authentic vanilla prices as this is for Individual Progression servers or servers that mimic vanilla via the 3.3.5 client. I will also be making scripts for TBC, Wrath, consumables, enchants, etc. 
+As a means to not create an infinite source of easy gold, I've adjusted some prices for crafted materials to be lower than usual to make the margins tighter.
+Please feel free to adjust any values you see fit.
 	
 	Features include:
-	The script uses a dynamic pricing system for items, with prices changing based on several factors, including the day of the week, the time of day, and a global fluctuation value. This means that prices will vary from month to month, day to day, hour to hour.
+	The script uses a dynamic pricing system for items, with prices changing based on several factors, including the day of the week, the time of day, and a global fluctuation value. This means that prices will vary from month to month, day to 	day, hour to hour.
 	1. Inflation: The script includes an inflation system that increases prices over time, based on a defined monthly inflation rate. The inflation system can be enabled or disabled as needed.
 	2. Price Caps: The script includes a maximum inflation multiplier that limits the amount prices can increase due to inflation.
 	3. Price Fluctuations: The script includes a system for randomly fluctuating prices. This feature can be enabled or disabled as needed.
