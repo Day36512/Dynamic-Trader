@@ -111,7 +111,7 @@ local categories = {
         { name = "|TInterface\\Icons\\inv_misc_herb_08:36:36:-42|tKhadgar's Whisker", id = 3358, price = 330 },
         { name = "|TInterface\\Icons\\inv_misc_flower_03:36:36:-42|tWintersbite", id = 3819, price = 744 },
         { name = "|TInterface\\Icons\\inv_misc_herb_19:36:36:-42|tFirebloom", id = 4625, price = 574 },
-		{ name = "|TInterface\\Icons\\inv_misc_herb_08:36:36:-42|tHeart of the Wild", id = 3358, price = 1280 },
+		{ name = "|TInterface\\Icons\\inv_misc_herb_08:36:36:-42|tHeart of the Wild", id = 10286, price = 1280 },
         { name = "|TInterface\\Icons\\inv_misc_herb_17:36:36:-42|tPurple Lotus", id = 8831, price = 599 },
         { name = "|TInterface\\Icons\\inv_misc_herb_13:36:36:-42|tArthas' Tears", id = 8836, price = 1520 },
         { name = "|TInterface\\Icons\\inv_misc_herb_18:36:36:-42|tSungrass", id = 8838, price = 2598 },
