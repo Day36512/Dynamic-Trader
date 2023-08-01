@@ -46,18 +46,21 @@ DynamicMarketTrader
 	After the GM enters the command and the desired value, they receive a confirmation message and a reminder that the change will be reset when the server restarts.	
 ]]
 
-local NPCIDs = {180000} -- add more npcids with commas as needed. .npc add 180000 in the world where desired (for my repack users, I've already done so).
-local BUY_PERCENTAGE = 0.90  -- Define the buy constant multiplier. I have this set lower due to inflation. If disabled, maybe set it higher.
-local SELL_PERCENTAGE = 0.80  -- Define the sell constant multiplier. Sell is lower to mimic auctionhouse cuts and to prevent cheating. Players can still make profit but they have to be more methodical. ah cut is 5% but I like 10% better.
-local INFLATION_RATE = 0.033 -- monthly percentage increase in prices of 3.3% is default. Inflation increases in real time. Can change to be higher or lower.
-local FLUCTUATION_ENABLED = true -- enable or disable hourly price fluctuations
-local INFLATION_ENABLED = true -- enable or disable inflation
-local ORIGINAL_TIMESTAMP = 1690504446 -- Time in unix, currently set to Sat Jun 27 2023. You'll want to set the time in unix for when your server started https://www.unixtimestamp.com/ Inflation will be calculated based on the time difference from this point.
-local MAX_INFLATION_MULTIPLIER = 2.0  -- Maximum price multiplier due to inflation. 2.0 corresponds to 100% inflation. 3.0 would be 200%, etc. This ensures inflation never goes to rediculous amounts. You can adjust as necessary. Doubtful many will play for that length of time.
+VanillaTraderScript = {}
 
+
+VanillaTraderScript.NPCIDs = {180000} -- add more npcids with commas as needed. .npc add 180000 in the world where desired (for my repack users, I've already done so).
+VanillaTraderScript.BUY_PERCENTAGE = 0.90  -- Define the buy constant multiplier. I have this set lower due to inflation. If disabled, maybe set it higher.
+VanillaTraderScript.SELL_PERCENTAGE = 0.80  -- Define the sell constant multiplier. Sell is lower to mimic auctionhouse cuts and to prevent cheating. Players can still make profit but they have to be more methodical. ah cut is 5% but I like 10% better.
+VanillaTraderScript.INFLATION_RATE = 0.033 -- monthly percentage increase in prices of 3.3% is default. Inflation increases in real time. Can change to be higher or lower.
+VanillaTraderScript.FLUCTUATION_ENABLED = true -- enable or disable hourly price fluctuations
+VanillaTraderScript.INFLATION_ENABLED = true -- enable or disable inflation
+VanillaTraderScript.ORIGINAL_TIMESTAMP = 1690504446 -- Time in unix, currently set to Sat Jun 27 2023. You'll want to set the time in unix for when your server started https://www.unixtimestamp.com/ Inflation will be calculated based on the time difference from this point.
+VanillaTraderScript.MAX_INFLATION_MULTIPLIER = 2.0  -- Maximum price multiplier due to inflation. 2.0 corresponds to 100% inflation. 3.0 would be 200%, etc. This ensures inflation never goes to rediculous amounts. You can adjust as necessary. Doubtful many will play for that length of time.
 
 -- Mapping day of the week to the multiplier. Adjust as you see fit. See further below for time of day multipliers.
-local DAY_MULTIPLIER = {
+
+VanillaTraderScript.DAY_MULTIPLIER = {
     [1] = 1.0,  -- Sunday (Quiet, weekend over)
     [2] = 1.03, -- Monday (Regular day, pre-reset prep)
     [3] = 1.12,  -- Tuesday (Server reset day, high demand)
@@ -68,7 +71,7 @@ local DAY_MULTIPLIER = {
 }
 
 
-local ITEM_QUALITY_COLORS = {
+VanillaTraderScript.ITEM_QUALITY_COLORS = {
     [0] = "9d9d9d", -- Poor, Gray
     [1] = "ffffff", -- Common, White
     [2] = "1eff00", -- Uncommon, Green
@@ -79,21 +82,21 @@ local ITEM_QUALITY_COLORS = {
 }
 
 -- Constants for sender id
-local BUY_SELL = 1
-local BUY_CATEGORY = 2
-local SELL_CATEGORY = 3
-local BUY_SUBCATEGORY = 4
-local SELL_SUBCATEGORY = 5
-local BUY_QUANTITY = 6
-local SELL_QUANTITY = 7
+VanillaTraderScript.BUY_SELL = 1
+VanillaTraderScript.BUY_CATEGORY = 2
+VanillaTraderScript.SELL_CATEGORY = 3
+VanillaTraderScript.BUY_SUBCATEGORY = 4
+VanillaTraderScript.SELL_SUBCATEGORY = 5
+VanillaTraderScript.BUY_QUANTITY = 6
+VanillaTraderScript.SELL_QUANTITY = 7
 
-local GLOBAL_FLUCTUATION = 0 -- Don't change
+VanillaTraderScript.GLOBAL_FLUCTUATION = 0 -- Don't change
 
 
 -- Think long and hard about changing price values. Do you really want players to buy 2 items for 50 copper to immediately turn around and make 3 gold via crafting it into another item over and over again?
 -- Feel free to disable any item by commenting it out.
 
-local categories = {
+VanillaTraderScript.categories = {
   { name = "|TInterface\\Icons\\inv_misc_herb_frostlotus:40:40:-42|t|cff006400Herbs|r", intid = 100, items = {
         { name = "|TInterface\\Icons\\inv_misc_flower_02:36:36:-42|tPeacebloom", id = 2447, price = 39 },
         { name = "|TInterface\\Icons\\inv_misc_herb_10:36:36:-42|tSilverleaf", id = 765, price = 53 },
@@ -402,22 +405,22 @@ local categories = {
     }},
 }
 
-local function UpdateFluctuation()
+function VanillaTraderScript.UpdateFluctuation()
     if FLUCTUATION_ENABLED then
-        GLOBAL_FLUCTUATION = math.random(-5, 5) / 100
+        VanillaTraderScript.GLOBAL_FLUCTUATION = math.random(-5, 5) / 100
     end
 end
 
-local function OnServerStartupVanillaFluctuation(event)
+function VanillaTraderScript.OnServerStartupVanillaFluctuation(event)
 	print("Trader startup event triggered.")
-    UpdateFluctuation()
+    VanillaTraderScript.UpdateFluctuation()
 end
 
-local GOLD_ICON = "|TInterface\\MoneyFrame\\UI-GoldIcon:19:19:2:0|t"
-local SILVER_ICON = "|TInterface\\MoneyFrame\\UI-SilverIcon:19:19:2:0|t"
-local COPPER_ICON = "|TInterface\\MoneyFrame\\UI-CopperIcon:19:19:2:0|t"
+VanillaTraderScript.OnServerStartupVanillaFluctuation(event)GOLD_ICON = "|TInterface\\MoneyFrame\\UI-GoldIcon:19:19:2:0|t"
+VanillaTraderScript.OnServerStartupVanillaFluctuation(event)SILVER_ICON = "|TInterface\\MoneyFrame\\UI-SilverIcon:19:19:2:0|t"
+VanillaTraderScript.OnServerStartupVanillaFluctuation(event)COPPER_ICON = "|TInterface\\MoneyFrame\\UI-CopperIcon:19:19:2:0|t"
 
-local function convertMoney(copper)
+function VanillaTraderScript.convertMoney(copper)
     local gold = math.floor(copper / 10000)
     copper = copper - gold * 10000
     local silver = math.floor(copper / 100)
@@ -440,38 +443,37 @@ local function convertMoney(copper)
     return moneyStr
 end
 
-local function GetItemColor(quality)
+function VanillaTraderScript.GetItemColor(quality)
     return ITEM_QUALITY_COLORS[quality] or "ffffff" -- White color by default if no quality match
 end
 
-local function GetItemString(item)
+function VanillaTraderScript.GetItemString(item)
     local itemTemplate = GetItemTemplate(item.id) -- Get the item template
     local quality = itemTemplate:GetQuality() -- Get the item quality from the item template
-    local color = GetItemColor(quality)
+    local color = VanillaTraderScript.GetItemColor(quality)
     local itemName = string.match(item.name, "|t(.*)") -- Exclude the icon from the item name
     return "|cff" .. color .. " [" .. itemName .. "]|r"
 end
 
-
-local intidToEntity = {}
-for _, category in ipairs(categories) do
-    intidToEntity[category.intid] = category
+VanillaTraderScript.intidToEntity = {}
+for _, category in ipairs(VanillaTraderScript.categories) do
+    VanillaTraderScript.intidToEntity[category.intid] = category
     for i, item in ipairs(category.items) do
-        intidToEntity[category.intid * 100 + i] = item
+        VanillaTraderScript.intidToEntity[category.intid * 100 + i] = item
     end
 end
 
-local function getDayOfWeek()
+
+function VanillaTraderScript.getDayOfWeek()
     return os.date("*t").wday
 end
 
-local function getCurrentHour()
+function VanillaTraderScript.getCurrentHour()
     return os.date("*t").hour
 end
 
--- Get time of day multiplier. Adjust as you see fit.
-local function getTimeMultiplier()
-    local hour = getCurrentHour()
+function VanillaTraderScript.getTimeMultiplier()
+    local hour = VanillaTraderScript.getCurrentHour()
     local TIME_MULTIPLIER = {
         [0] = 0.96,   -- 12am
         [1] = 0.96,  -- 1am
@@ -501,123 +503,124 @@ local function getTimeMultiplier()
     return TIME_MULTIPLIER[hour]
 end
 
-local function getPriceMultiplier()
-    local dayOfWeek = getDayOfWeek()
+function VanillaTraderScript.getPriceMultiplier()
+    local dayOfWeek = VanillaTraderScript.getDayOfWeek()
     local elapsedTimeInMonths = os.difftime(os.time(), ORIGINAL_TIMESTAMP) / (30 * 24 * 60 * 60)
     local inflationMultiplier = 1
     if INFLATION_ENABLED then
         inflationMultiplier = (1 + INFLATION_RATE) ^ elapsedTimeInMonths
         inflationMultiplier = math.min(inflationMultiplier, MAX_INFLATION_MULTIPLIER)
     end
-    return DAY_MULTIPLIER[dayOfWeek] * getTimeMultiplier() * inflationMultiplier + GLOBAL_FLUCTUATION
+    return VanillaTraderScript.DAY_MULTIPLIER[dayOfWeek] * VanillaTraderScript.getTimeMultiplier() * inflationMultiplier + VanillaTraderScript.GLOBAL_FLUCTUATION
 end
 
-local function ShowMainMenu(player, unit)
+function VanillaTraderScript.ShowMainMenu(player, unit)
     player:GossipClearMenu()
     player:GossipMenuAddItem(1, "Buy", 1, 0)
     player:GossipMenuAddItem(1, "Sell", 1, 1)
     player:GossipSendMenu(1, unit)
 end
 
-local function ShowItemMenu(player, unit, items, intid)
+function VanillaTraderScript.ShowItemMenu(player, unit, items, intid)
     for i, item in ipairs(items) do
-        player:GossipMenuAddItem(1, item.name .. " - " .. convertMoney(item.price * getPriceMultiplier()), intid, i)
+        player:GossipMenuAddItem(1, item.name .. " - " .. VanillaTraderScript.convertMoney(item.price * VanillaTraderScript.getPriceMultiplier()), intid, i)
     end
     player:GossipSendMenu(1, unit)
 end
 
-local function OnGossipHelloVanillaTrader(event, player, object)
-    ShowMainMenu(player, object)
+function VanillaTraderScript.OnGossipHelloVanillaTrader(event, player, object)
+    VanillaTraderScript.ShowMainMenu(player, object)
 end
 
-local function OnGossipSelectVanillaTrader(event, player, object, sender, intid, code, menu_id)
-    player:GossipClearMenu()
-    if sender == BUY_SELL then
-        local buyOrSell = intid == 0 and "Buy" or "Sell"
-        player:GossipMenuAddItem(3, "Current Page: |cff" .. (buyOrSell == "Buy" and "0000ff" or "006400") .. buyOrSell .. "|r | Switch to |cff" .. (buyOrSell == "Sell" and "0000ff" or "006400") .. (buyOrSell == "Buy" and "Sell" or "Buy") .. "|r Page", BUY_SELL, intid == 0 and 1 or 0)
 
-        for _, category in ipairs(categories) do
-            player:GossipMenuAddItem(0, category.name, buyOrSell == "Buy" and BUY_CATEGORY or SELL_CATEGORY, category.intid)
+function VanillaTraderScript.OnGossipSelectVanillaTrader(event, player, object, sender, intid, code, menu_id)
+    player:GossipClearMenu()
+    if sender == VanillaTraderScript.BUY_SELL then
+        local buyOrSell = intid == 0 and "Buy" or "Sell"
+        player:GossipMenuAddItem(3, "Current Page: |cff" .. (buyOrSell == "Buy" and "0000ff" or "006400") .. buyOrSell .. "|r | Switch to |cff" .. (buyOrSell == "Sell" and "0000ff" or "006400") .. (buyOrSell == "Buy" and "Sell" or "Buy") .. "|r Page", VanillaTraderScript.BUY_SELL, intid == 0 and 1 or 0)
+
+        for _, category in ipairs(VanillaTraderScript.categories) do
+            player:GossipMenuAddItem(0, category.name, buyOrSell == "Buy" and VanillaTraderScript.BUY_CATEGORY or VanillaTraderScript.SELL_CATEGORY, category.intid)
         end
-        player:GossipMenuAddItem(3, "Current Page: |cff" .. (buyOrSell == "Buy" and "0000ff" or "006400") .. buyOrSell .. "|r | Switch to |cff" .. (buyOrSell == "Sell" and "0000ff" or "006400") .. (buyOrSell == "Buy" and "Sell" or "Buy") .. "|r Page", BUY_SELL, intid == 0 and 1 or 0)
+        player:GossipMenuAddItem(3, "Current Page: |cff" .. (buyOrSell == "Buy" and "0000ff" or "006400") .. buyOrSell .. "|r | Switch to |cff" .. (buyOrSell == "Sell" and "0000ff" or "006400") .. (buyOrSell == "Buy" and "Sell" or "Buy") .. "|r Page", VanillaTraderScript.BUY_SELL, intid == 0 and 1 or 0)
 
         player:GossipSendMenu(1, object)
-    elseif sender == BUY_CATEGORY or sender == SELL_CATEGORY then
-        local category = intidToEntity[intid]
+    elseif sender == VanillaTraderScript.BUY_CATEGORY or sender == VanillaTraderScript.SELL_CATEGORY then
+        local category = VanillaTraderScript.intidToEntity[intid]
         if category then
-            player:GossipMenuAddItem(7, "|cff8b0000Back|r", BUY_SELL, sender == BUY_CATEGORY and 0 or 1)
             for i, item in ipairs(category.items) do
-                local price = item.price * (sender == BUY_CATEGORY and BUY_PERCENTAGE or SELL_PERCENTAGE) * getPriceMultiplier()
-                if sender == BUY_CATEGORY or (sender == SELL_CATEGORY and player:HasItem(item.id)) then
-                    player:GossipMenuAddItem(1, item.name .. "\n       |cff006400Price:|r " .. convertMoney(price), sender == BUY_CATEGORY and BUY_QUANTITY or SELL_QUANTITY, intid * 100 + i, true, "How many do you want to " .. (sender == BUY_CATEGORY and "buy" or "sell") .. "? \nPrice per unit " .. convertMoney(price))
+                local price = item.price * (sender == VanillaTraderScript.BUY_CATEGORY and VanillaTraderScript.BUY_PERCENTAGE or VanillaTraderScript.SELL_PERCENTAGE) * VanillaTraderScript.getPriceMultiplier()
+                if sender == VanillaTraderScript.BUY_CATEGORY or (sender == VanillaTraderScript.SELL_CATEGORY and player:HasItem(item.id)) then
+                    player:GossipMenuAddItem(1, item.name .. "\n       |cff006400Price:|r " .. VanillaTraderScript.convertMoney(price), sender == VanillaTraderScript.BUY_CATEGORY and VanillaTraderScript.BUY_QUANTITY or VanillaTraderScript.SELL_QUANTITY, intid * 100 + i, true, "How many do you want to " .. (sender == VanillaTraderScript.BUY_CATEGORY and "buy" or "sell") .. "? \nPrice per unit " .. VanillaTraderScript.convertMoney(price))
                 end
             end
-            player:GossipMenuAddItem(7, "|cff8b0000Back|r", BUY_SELL, sender == BUY_CATEGORY and 0 or 1)
+            player:GossipMenuAddItem(7, "|cff8b0000Back|r", VanillaTraderScript.BUY_SELL, sender == VanillaTraderScript.BUY_CATEGORY and 0 or 1)
         end
         player:GossipSendMenu(1, object)
-    elseif sender == BUY_QUANTITY or sender == SELL_QUANTITY then
+    elseif sender == VanillaTraderScript.BUY_QUANTITY or sender == VanillaTraderScript.SELL_QUANTITY then
         local quantity = tonumber(code)
-        local item = intidToEntity[intid]
+        local item = VanillaTraderScript.intidToEntity[intid]
         if quantity and item then
             local unitPrice
             local totalPrice
-            if sender == BUY_QUANTITY then 
-    unitPrice = item.price * BUY_PERCENTAGE * getPriceMultiplier()
-    totalPrice = unitPrice * quantity
-    if player:GetCoinage() < totalPrice then
-        player:SendBroadcastMessage("You do not have enough money.")
-        ShowMainMenu(player, object)
-        return
-    end
-    player:ModifyMoney(-totalPrice)
-    local maxStackSize = 20  -- Adjust as necessary for different items
-    local numFullStacks = math.floor(quantity / maxStackSize)
-    local remainder = quantity % maxStackSize
-    for i = 1, numFullStacks do
-        SendMail("Your purchased item", "Here is a stack of items you purchased.", player:GetGUIDLow(), player:GetGUIDLow(), 62, 0, 0, 0, item.id, maxStackSize)
-    end
-    if remainder > 0 then
-        SendMail("Your purchased item", "Here is the remaining items you purchased.", player:GetGUIDLow(), player:GetGUIDLow(), 62, 0, 0, 0, item.id, remainder)
-    end
-	player:SendBroadcastMessage("You bought |cffffffff" .. quantity .. "x|r " .. GetItemString(item) .. " for |cffffffff" .. convertMoney(totalPrice) .. "|r. The items were sent to your mailbox.")
+            if sender == VanillaTraderScript.BUY_QUANTITY then 
+                unitPrice = item.price * VanillaTraderScript.BUY_PERCENTAGE * VanillaTraderScript.getPriceMultiplier()
+                totalPrice = unitPrice * quantity
+                if player:GetCoinage() < totalPrice then
+                    player:SendBroadcastMessage("You do not have enough money.")
+                    VanillaTraderScript.ShowMainMenu(player, object)
+                    return
+                end
+                player:ModifyMoney(-totalPrice)
+                local maxStackSize = 20  -- Adjust as necessary for different items
+                local numFullStacks = math.floor(quantity / maxStackSize)
+                local remainder = quantity % maxStackSize
+                for i = 1, numFullStacks do
+                    SendMail("Your purchased item", "Here is a stack of items you purchased.", player:GetGUIDLow(), player:GetGUIDLow(), 62, 0, 0, 0, item.id, maxStackSize)
+                end
+                if remainder > 0 then
+                    SendMail("Your purchased item", "Here is the remaining items you purchased.", player:GetGUIDLow(), player:GetGUIDLow(), 62, 0, 0, 0, item.id, remainder)
+                end
+                player:SendBroadcastMessage("You bought |cffffffff" .. quantity .. "x|r " .. VanillaTraderScript.GetItemString(item) .. " for |cffffffff" .. VanillaTraderScript.convertMoney(totalPrice) .. "|r. The items were sent to your mailbox.")
             else 
                 if not player:HasItem(item.id, quantity) then
                     player:SendBroadcastMessage("You do not have enough items.")
-                    ShowMainMenu(player, object)
+                    VanillaTraderScript.ShowMainMenu(player, object)
                     return
                 end
-                unitPrice = item.price * SELL_PERCENTAGE * getPriceMultiplier()
+                unitPrice = item.price * VanillaTraderScript.SELL_PERCENTAGE * VanillaTraderScript.getPriceMultiplier()
                 totalPrice = unitPrice * quantity
                 player:RemoveItem(item.id, quantity) 
                 player:ModifyMoney(totalPrice) 
-	player:SendBroadcastMessage("You sold |cffffffff" .. quantity .. "x|r " .. GetItemString(item) .. " for |cffffffff" .. convertMoney(totalPrice) .. "|r.")
+                player:SendBroadcastMessage("You sold |cffffffff" .. quantity .. "x|r " .. VanillaTraderScript.GetItemString(item) .. " for |cffffffff" .. VanillaTraderScript.convertMoney(totalPrice) .. "|r.")
             end
             player:GossipClearMenu()
-            ShowMainMenu(player, object)
+            VanillaTraderScript.ShowMainMenu(player, object)
         else
-            ShowMainMenu(player, object)
+            VanillaTraderScript.ShowMainMenu(player, object)
         end
     else
-        ShowMainMenu(player, object)
+        VanillaTraderScript.ShowMainMenu(player, object)
     end
 end
 
-local eventId = CreateLuaEvent(UpdateFluctuation, 3600000, 0)
+
+
+VanillaTraderScript.eventId = CreateLuaEvent(VanillaTraderScript.UpdateFluctuation, 3600000, 0)
 
 -- GM Commands for checking multipliers and updating the global fluctuation
-
 local REQUIRED_GM_RANK = 3
 
-local function HandleFluctuationsCommandVanillaTrader(event, player, command)
+function VanillaTraderScript.HandleFluctuationsCommandVanillaTrader(event, player, command)
     if (command:lower() == "vprices") then
         if player:GetGMRank() < REQUIRED_GM_RANK then
             player:SendBroadcastMessage("You do not have permission to use this command.")
             return false
         end
-        local dayOfWeek = getDayOfWeek()
-        local dayMultiplier = DAY_MULTIPLIER[dayOfWeek]
-        local timeMultiplier = getTimeMultiplier()
-        local priceMultiplier = getPriceMultiplier()
+        local dayOfWeek = VanillaTraderScript.getDayOfWeek()
+        local dayMultiplier = VanillaTraderScript.DAY_MULTIPLIER[dayOfWeek]
+        local timeMultiplier = VanillaTraderScript.getTimeMultiplier()
+        local priceMultiplier = VanillaTraderScript.getPriceMultiplier()
         local currentTime = os.time()
         local elapsedTimeInMonths = os.difftime(currentTime, ORIGINAL_TIMESTAMP) / (30 * 24 * 60 * 60)
         local inflationMultiplier = 1
@@ -626,30 +629,31 @@ local function HandleFluctuationsCommandVanillaTrader(event, player, command)
             inflationMultiplier = math.min(inflationMultiplier, MAX_INFLATION_MULTIPLIER)
         end
         player:SendBroadcastMessage("Day of the week Multiplier: " .. dayOfWeek .. " (multiplier: " .. dayMultiplier .. ")")
-        player:SendBroadcastMessage("Current hour Multiplier: " .. getCurrentHour() .. " (multiplier: " .. timeMultiplier .. ")")
-        player:SendBroadcastMessage("Global fluctuation Multiplier: " .. GLOBAL_FLUCTUATION)
+        player:SendBroadcastMessage("Current hour Multiplier: " .. VanillaTraderScript.getCurrentHour() .. " (multiplier: " .. timeMultiplier .. ")")
+        player:SendBroadcastMessage("Global fluctuation Multiplier: " .. VanillaTraderScript.GLOBAL_FLUCTUATION)
         player:SendBroadcastMessage("Inflation Multiplier: " .. inflationMultiplier)
         player:SendBroadcastMessage("Total of Price multiplier: " .. priceMultiplier)
-        player:SendBroadcastMessage("Buy percentage: " .. BUY_PERCENTAGE)
-        player:SendBroadcastMessage("Sell percentage: " .. SELL_PERCENTAGE)
+        player:SendBroadcastMessage("Buy percentage: " .. VanillaTraderScript.BUY_PERCENTAGE)
+        player:SendBroadcastMessage("Sell percentage: " .. VanillaTraderScript.SELL_PERCENTAGE)
         player:SendBroadcastMessage("GMs can shuffle the Global Fluctuation with the '.vprices shuffle' command.")
         return false
     end
 end
 
-local function HandleShufflePricesCommandVanillaTrader(event, player, command)
+function VanillaTraderScript.HandleShufflePricesCommandVanillaTrader(event, player, command)
     if (command:lower() == "vprices shuffle") then
         if player:GetGMRank() < REQUIRED_GM_RANK then
             player:SendBroadcastMessage("You do not have permission to use this command.")
             return false
         end
-        UpdateFluctuation()
-        player:SendBroadcastMessage("Prices have been shuffled. New global fluctuation: " .. GLOBAL_FLUCTUATION)
+        VanillaTraderScript.UpdateFluctuation()
+        player:SendBroadcastMessage("Prices have been shuffled. New global fluctuation: " .. VanillaTraderScript.GLOBAL_FLUCTUATION)
         return false
     end
 end
 
-local function HandleBuyPercentageCommandVanillaTrader(event, player, command)
+
+function VanillaTraderScript.HandleBuyPercentageCommandVanillaTrader(event, player, command)
     if command:find("vbp") then
         if player:GetGMRank() < REQUIRED_GM_RANK then
             player:SendBroadcastMessage("You do not have permission to use this command.")
@@ -657,15 +661,15 @@ local function HandleBuyPercentageCommandVanillaTrader(event, player, command)
         end
         local _, _, value = command:find("(%S+)$")
         if value then
-            BUY_PERCENTAGE = tonumber(value)
-            player:SendBroadcastMessage("Buy multiplier has been set to: " .. BUY_PERCENTAGE)
+            VanillaTraderScript.BUY_PERCENTAGE = tonumber(value)
+            player:SendBroadcastMessage("Buy multiplier has been set to: " .. VanillaTraderScript.BUY_PERCENTAGE)
             player:SendBroadcastMessage("Please note that this change will be reset to script values on server restart.")
             return false
         end
     end
 end
 
-local function HandleSellPercentageCommandVanillaTrader(event, player, command)
+function VanillaTraderScript.HandleSellPercentageCommandVanillaTrader(event, player, command)
     if command:find("vsp") then
         if player:GetGMRank() < REQUIRED_GM_RANK then
             player:SendBroadcastMessage("You do not have permission to use this command.")
@@ -673,8 +677,8 @@ local function HandleSellPercentageCommandVanillaTrader(event, player, command)
         end
         local _, _, value = command:find("(%S+)$")
         if value then
-            SELL_PERCENTAGE = tonumber(value)
-            player:SendBroadcastMessage("Sell multiplier has been set to: " .. SELL_PERCENTAGE)
+            VanillaTraderScript.SELL_PERCENTAGE = tonumber(value)
+            player:SendBroadcastMessage("Sell multiplier has been set to: " .. VanillaTraderScript.SELL_PERCENTAGE)
             player:SendBroadcastMessage("Please note that this change will be reset to script values on server restart.")
             return false
         end
@@ -682,15 +686,13 @@ local function HandleSellPercentageCommandVanillaTrader(event, player, command)
 end
 
 
+RegisterPlayerEvent(42, VanillaTraderScript.HandleBuyPercentageCommandVanillaTrader)
+RegisterPlayerEvent(42, VanillaTraderScript.HandleSellPercentageCommandVanillaTrader)
+RegisterPlayerEvent(42, VanillaTraderScript.HandleFluctuationsCommandVanillaTrader)
+RegisterPlayerEvent(42, VanillaTraderScript.HandleShufflePricesCommandVanillaTrader)
+RegisterServerEvent(14, VanillaTraderScript.OnServerStartupVanillaFluctuation)
 
-RegisterPlayerEvent(42, HandleBuyPercentageCommandVanillaTrader)
-RegisterPlayerEvent(42, HandleSellPercentageCommandVanillaTrader)
-RegisterPlayerEvent(42, HandleFluctuationsCommandVanillaTrader)
-RegisterPlayerEvent(42, HandleShufflePricesCommandVanillaTrader)
-RegisterServerEvent(14, OnServerStartupVanillaFluctuation)
-
-for _, NPCID in ipairs(NPCIDs) do
-    RegisterCreatureGossipEvent(NPCID, 1, OnGossipHelloVanillaTrader)
-    RegisterCreatureGossipEvent(NPCID, 2, OnGossipSelectVanillaTrader)
+for _, NPCIDs in ipairs(VanillaTraderScript.NPCIDs) do
+    RegisterCreatureGossipEvent(NPCIDs, 1, VanillaTraderScript.OnGossipHelloVanillaTrader)
+    RegisterCreatureGossipEvent(NPCIDs, 2, VanillaTraderScript.OnGossipSelectVanillaTrader)
 end
-
