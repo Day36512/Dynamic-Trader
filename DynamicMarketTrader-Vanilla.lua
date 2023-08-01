@@ -557,38 +557,34 @@ local function OnGossipSelectVanillaTrader(event, player, object, sender, intid,
         local quantity = tonumber(code)
         local item = intidToEntity[intid]
         if quantity and item then
-            local unitPrice
-            local totalPrice
+            local unitPrice = item.price * (sender == BUY_QUANTITY and BUY_PERCENTAGE or SELL_PERCENTAGE) * getPriceMultiplier()
+            local totalPrice = unitPrice * quantity
             if sender == BUY_QUANTITY then 
-    unitPrice = item.price * BUY_PERCENTAGE * getPriceMultiplier()
-    totalPrice = unitPrice * quantity
-    if player:GetCoinage() < totalPrice then
-        player:SendBroadcastMessage("You do not have enough money.")
-        ShowMainMenu(player, object)
-        return
-    end
-    player:ModifyMoney(-totalPrice)
-    local maxStackSize = 20  -- Adjust as necessary for different items
-    local numFullStacks = math.floor(quantity / maxStackSize)
-    local remainder = quantity % maxStackSize
-    for i = 1, numFullStacks do
-        SendMail("Your purchased item", "Here is a stack of items you purchased.", player:GetGUIDLow(), player:GetGUIDLow(), 62, 0, 0, 0, item.id, maxStackSize)
-    end
-    if remainder > 0 then
-        SendMail("Your purchased item", "Here is the remaining items you purchased.", player:GetGUIDLow(), player:GetGUIDLow(), 62, 0, 0, 0, item.id, remainder)
-    end
-    player:SendBroadcastMessage("You bought |cffffffff" .. quantity .. "x|r " .. GetItemString(item) .. " for |cffffffff" .. convertMoney(totalPrice) .. "|r. The items were sent to your mailbox.")
-            else 
+                if player:GetCoinage() < totalPrice then
+                    player:SendBroadcastMessage("You do not have enough money.")
+                    ShowMainMenu(player, object)
+                    return
+                end
+                player:ModifyMoney(-totalPrice)
+                local maxStackSize = 20
+                local numFullStacks = math.floor(quantity / maxStackSize)
+                local remainder = quantity % maxStackSize
+                for i = 1, numFullStacks do
+                    SendMail("Your purchased item", "Here is a stack of items you purchased.", player:GetGUIDLow(), player:GetGUIDLow(), 62, 0, 0, 0, item.id, maxStackSize)
+                end
+                if remainder > 0 then
+                    SendMail("Your purchased item", "Here is the remaining items you purchased.", player:GetGUIDLow(), player:GetGUIDLow(), 62, 0, 0, 0, item.id, remainder)
+                end
+                player:SendBroadcastMessage("You bought |cffffffff" .. quantity .. "x|r " .. GetItemString(item) .. " for |cffffffff" .. convertMoney(totalPrice) .. "|r. The items were sent to your mailbox.")
+            else
                 if not player:HasItem(item.id, quantity) then
                     player:SendBroadcastMessage("You do not have enough items.")
                     ShowMainMenu(player, object)
                     return
                 end
-                unitPrice = item.price * SELL_PERCENTAGE * getPriceMultiplier()
-                totalPrice = unitPrice * quantity
                 player:RemoveItem(item.id, quantity) 
                 player:ModifyMoney(totalPrice) 
-    player:SendBroadcastMessage("You sold |cffffffff" .. quantity .. "x|r " .. GetItemString(item) .. " for |cffffffff" .. convertMoney(totalPrice) .. "|r.")
+                player:SendBroadcastMessage("You sold |cffffffff" .. quantity .. "x|r " .. GetItemString(item) .. " for |cffffffff" .. convertMoney(totalPrice) .. "|r.")
             end
             player:GossipClearMenu()
             ShowMainMenu(player, object)
@@ -599,6 +595,7 @@ local function OnGossipSelectVanillaTrader(event, player, object, sender, intid,
         ShowMainMenu(player, object)
     end
 end
+
 
 
 local eventId = CreateLuaEvent(UpdateFluctuation, 3600000, 0)
