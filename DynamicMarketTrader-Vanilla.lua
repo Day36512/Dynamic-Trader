@@ -387,7 +387,7 @@ local categories = {
         { name = "|TInterface\\Icons\\inv_stone_grindingstone_01:36:36:-42|tRough Grinding Stone", id = 3470, price = 1555 },
         { name = "|TInterface\\Icons\\inv_stone_grindingstone_02:36:36:-42|tCoarse Grinding Stone", id = 3478, price = 4700 },
         { name = "|TInterface\\Icons\\inv_stone_grindingstone_03:36:36:-42|tHeavy Grinding Stone", id = 3486, price = 4500 },
-        { name = "|TInterface\\Icons\\inv_stone_grindingstone_04:36:36:-42|tSolid Grinding Stone", id = 7944, price = 20300 },
+        { name = "|TInterface\\Icons\\inv_stone_grindingstone_04:36:36:-42|tSolid Grinding Stone", id = 7966, price = 20300 },
         { name = "|TInterface\\Icons\\inv_stone_grindingstone_05:36:36:-42|tDense Grinding Stone", id = 12644, price = 23000 },
 		{ name = "|TInterface\\Icons\\inv_jewelcrafting_delicatecopperwire:36:36:-42|tDelicate Copper Wire", id = 20816, price = 163 },
 		{ name = "|TInterface\\Icons\\inv_jewelcrafting_bronzesetting:36:36:-42|tBronze Setting", id = 20817, price = 800 },
