@@ -45,7 +45,7 @@ DynamicMarketTrader
 	After the GM enters the command and the desired value, they receive a confirmation message and a reminder that the change will be reset when the server restarts.	
 ]]
 
-local NPCIDs = {180000} -- add more npcids with commas as needed. .npc add 180000 in the world where desired (for my repack users, I've already done so).
+local NPCIDs = {180000, 180001, 180002, 180003, 180004, 180005, 180006, 180007, 180008} -- add more npcids with commas as needed. .npc add 180000 in the world where desired (for my repack users, I've already done so).
 local BUY_PERCENTAGE = 0.90  -- Define the buy constant multiplier. I have this set lower due to inflation. If disabled, maybe set it higher.
 local SELL_PERCENTAGE = 0.80  -- Define the sell constant multiplier. Sell is lower to mimic auctionhouse cuts and to prevent cheating. Players can still make profit but they have to be more methodical. ah cut is 5% but I like 10% better.
 local INFLATION_RATE = 0.033 -- monthly percentage increase in prices of 3.3% is default. Inflation increases in real time. Can change to be higher or lower.
@@ -329,9 +329,10 @@ local categories = {
         { name = "|TInterface\\Icons\\inv_misc_gem_pearl_01:36:36:-42|tBlack Pearl", id = 7971, price = 4400 },
 		{ name = "|TInterface\\Icons\\inv_misc_gem_pearl_04:36:36:-42|tGolden Pearl", id = 7971, price = 45450 },
         { name = "|TInterface\\Icons\\inv_misc_gem_opal_02:36:36:-42|tCitrine", id = 3864, price = 1200 },    
-		{ name = "|TInterface\\Icons\\inv_misc_gem_crystal_02:36:36:-42|Aquamarine", id = 7909, price = 1648 },   		
+		{ name = "|TInterface\\Icons\\inv_misc_gem_crystal_02:36:36:-42|tAquamarine", id = 7909, price = 1648 },   		
         { name = "|TInterface\\Icons\\inv_misc_gem_01:36:36:-42|tSouldarite", id = 19774, price = 77000 },
         { name = "|TInterface\\Icons\\inv_misc_gem_ruby_02:36:36:-42|tStar Ruby", id = 7910, price = 11100 },
+		{ name = "|TInterface\\Icons\\inv_misc_gem_sapphire_02:36:36:-42|tSBlue Sapphire", id = 12361, price = 13150 },
         { name = "|TInterface\\Icons\\inv_misc_gem_opal_01:36:36:-42|tLarge Opal", id = 12799, price = 7000 },
         { name = "|TInterface\\Icons\\inv_misc_gem_diamond_01:36:36:-42|tAzerothian Diamond", id = 12800, price = 22089 },
         { name = "|TInterface\\Icons\\inv_misc_gem_emerald_01:36:36:-42|tHuge Emerald", id = 12364, price = 12000 },
@@ -387,7 +388,7 @@ local categories = {
         { name = "|TInterface\\Icons\\inv_stone_grindingstone_01:36:36:-42|tRough Grinding Stone", id = 3470, price = 1555 },
         { name = "|TInterface\\Icons\\inv_stone_grindingstone_02:36:36:-42|tCoarse Grinding Stone", id = 3478, price = 4700 },
         { name = "|TInterface\\Icons\\inv_stone_grindingstone_03:36:36:-42|tHeavy Grinding Stone", id = 3486, price = 4500 },
-        { name = "|TInterface\\Icons\\inv_stone_grindingstone_04:36:36:-42|tSolid Grinding Stone", id = 7966, price = 20300 },
+        { name = "|TInterface\\Icons\\inv_stone_grindingstone_04:36:36:-42|tSolid Grinding Stone", id = 7944, price = 20300 },
         { name = "|TInterface\\Icons\\inv_stone_grindingstone_05:36:36:-42|tDense Grinding Stone", id = 12644, price = 23000 },
 		{ name = "|TInterface\\Icons\\inv_jewelcrafting_delicatecopperwire:36:36:-42|tDelicate Copper Wire", id = 20816, price = 163 },
 		{ name = "|TInterface\\Icons\\inv_jewelcrafting_bronzesetting:36:36:-42|tBronze Setting", id = 20817, price = 800 },
