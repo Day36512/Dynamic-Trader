@@ -398,7 +398,7 @@ local categories = {
 		{ name = "|TInterface\\Icons\\inv_misc_monsterclaw_03:36:36:-42|tSharp Claw", id = 5635, price = 141 },
 		{ name = "|TInterface\\Icons\\spell_shadow_sealofkings:36:36:-42|tDark Rune", id = 20520, price = 100005 },        
 		{ name = "|TInterface\\Icons\\inv_potion_22:36:36:-42|tLarval Acid", id = 18512, price = 55000 },
-        { name = "|TInterface\\Icons\\inv_potion_22:36:36:-42|tGuardian Stone", id = 12809, price = 148500 },
+        { name = "|TInterface\\Icons\\inv_stone_02|tGuardian Stone", id = 12809, price = 148500 },
     }},
 }
 
