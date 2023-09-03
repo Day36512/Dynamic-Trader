@@ -45,7 +45,7 @@ DynamicMarketTrader
 	After the GM enters the command and the desired value, they receive a confirmation message and a reminder that the change will be reset when the server restarts.	
 ]]
 
-local NPCIDs = {180000} -- add more npcids with commas as needed. .npc add 180000 in the world where desired (for my repack users, I've already done so).
+local NPCIDs = {180000, 180001, 180002, 180003, 180004, 180005, 180006, 180007, 180008} -- add more npcids with commas as needed. .npc add 180000 in the world where desired (for my repack users, I've already done so).
 local BUY_PERCENTAGE = 0.90  -- Define the buy constant multiplier. I have this set lower due to inflation. If disabled, maybe set it higher.
 local SELL_PERCENTAGE = 0.80  -- Define the sell constant multiplier. Sell is lower to mimic auctionhouse cuts and to prevent cheating. Players can still make profit but they have to be more methodical. ah cut is 5% but I like 10% better.
 local INFLATION_RATE = 0.033 -- monthly percentage increase in prices of 3.3% is default. Inflation increases in real time. Can change to be higher or lower.
@@ -236,7 +236,7 @@ local categories = {
         { name = "|TInterface\\Icons\\inv_misc_fish_24:36:36:-42|tRaw Slitherskin Mackerel", id = 787, price = 1476 },
         { name = "|TInterface\\Icons\\inv_misc_fish_07:36:36:-42|tRaw Brilliant Smallfish", id = 6290, price = 1500 },
         { name = "|TInterface\\Icons\\inv_misc_fish_32:36:36:-42|tRaw Longjaw Mud Snapper", id = 6289, price = 67 },		
-        { name = "|TInterface\\Icons\\inv_misc_fish_30:36:36:-42|tRaw Bristle Whisker Catfish", id = 4593, price = 1270 },
+        { name = "|TInterface\\Icons\\inv_misc_fish_30:36:36:-42|tRaw Bristle Whisker Catfish", id = 6308, price = 1270 },
 		{ name = "|TInterface\\Icons\\inv_misc_fish_20:36:36:-42|tRaw Sagefish", id = 21071, price = 325 },  
         { name = "|TInterface\\Icons\\inv_misc_fish_27:36:36:-42|tRaw Rainbow Fin Albacore", id = 5095, price = 198 },
         { name = "|TInterface\\Icons\\inv_misc_fish_03:36:36:-42|tRaw Loch Frenzy", id = 6317, price = 171 },
