@@ -45,7 +45,7 @@ DynamicMarketTrader
 	After the GM enters the command and the desired value, they receive a confirmation message and a reminder that the change will be reset when the server restarts.	
 ]]
 
-local NPCIDs = {180000, 180001, 180002, 180003, 180004, 180005, 180006, 180007, 180008} -- add more npcids with commas as needed. .npc add 180000 in the world where desired (for my repack users, I've already done so).
+local NPCIDs = {180000} -- add more npcids with commas as needed. .npc add 180000 in the world where desired (for my repack users, I've already done so).
 local BUY_PERCENTAGE = 0.90  -- Define the buy constant multiplier. I have this set lower due to inflation. If disabled, maybe set it higher.
 local SELL_PERCENTAGE = 0.80  -- Define the sell constant multiplier. Sell is lower to mimic auctionhouse cuts and to prevent cheating. Players can still make profit but they have to be more methodical. ah cut is 5% but I like 10% better.
 local INFLATION_RATE = 0.033 -- monthly percentage increase in prices of 3.3% is default. Inflation increases in real time. Can change to be higher or lower.
