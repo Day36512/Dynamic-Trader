@@ -327,7 +327,7 @@ local categories = {
         { name = "|TInterface\\Icons\\inv_misc_gem_crystal_01:36:36:-42|tLesser Moonstone", id = 1705, price = 2499 },
         { name = "|TInterface\\Icons\\inv_misc_gem_stone_01:36:36:-42|tJade", id = 1529, price = 3374 },
         { name = "|TInterface\\Icons\\inv_misc_gem_pearl_01:36:36:-42|tBlack Pearl", id = 7971, price = 4400 },
-		{ name = "|TInterface\\Icons\\inv_misc_gem_pearl_04:36:36:-42|tGolden Pearl", id = 7971, price = 45450 },
+		{ name = "|TInterface\\Icons\\inv_misc_gem_pearl_04:36:36:-42|tGolden Pearl", id = 13926, price = 45450 },
         { name = "|TInterface\\Icons\\inv_misc_gem_opal_02:36:36:-42|tCitrine", id = 3864, price = 1200 },    
 		{ name = "|TInterface\\Icons\\inv_misc_gem_crystal_02:36:36:-42|tAquamarine", id = 7909, price = 1648 },   		
         { name = "|TInterface\\Icons\\inv_misc_gem_01:36:36:-42|tSouldarite", id = 19774, price = 77000 },
